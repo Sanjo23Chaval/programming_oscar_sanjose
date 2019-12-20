@@ -1,5 +1,5 @@
 def find_frequence (seq1, seq2):
-    n_nucleotides= len(seq1) + len(seq2) 
+    n_nucleotides= len(seq1) + len(seq2)
     d_residues= {}
     for i in range(len(seq1)):
         d_residues[seq1[i]]= d_residues.get(seq1[i],0)+1
@@ -27,7 +27,10 @@ def add_nonobserved (dicti):
     for letter in col_raw:
         for letter1 in col_raw:
             if letter+letter1 not in dicti.keys():
-                dicti[letter+letter1]= 1
+                if letter1+letter in dicti.keys():
+                    dicti[letter+letter1] = dicti[letter1+letter]
+                else:
+                    dicti[letter+letter1] = 1
     return dicti
 
 def log_odd (dicti1,dicti2):
@@ -45,6 +48,7 @@ sequence1="ACAGGTGGACCTCTATATGG"
 sequence2="ACTGGTCGACTTCCGGATCG"
 
 d_frequences= find_frequence(sequence1,sequence2)
+print d_frequences
 dictionary=observed_value(sequence1,sequence2)
 sorted_d= add_nonobserved(dictionary)
 log_odd(sorted_d, d_frequences)
