@@ -72,6 +72,22 @@ def max_score(alignments):
             max_score = i[0]
     return max_score_index
 
+def print_cool_output(max_score):
+    print max_score[0]
+    flag = True
+    seq1 = []
+    seq2 = []
+    for i in max_score[1]:
+        if i == "\n":
+            flag = False
+        if flag:
+            seq1.append(i)
+        else:
+            seq2.append(i)
+    seq2.remove("\n")
+    for i in range(len(seq1)):
+        
+
 matrix = matrix("nuc_matrix.txt")
 seq1 = "TCA"
 seq2 = "GA"
@@ -81,4 +97,4 @@ seq2_list = seqs_lists[1]
 alignments = alignments_matrix(seqs_lists,seq1,seq2,seq1_list,seq2_list,matrix)
 print alignments
 best_alignment = max_score(alignments)
-print best_alignment
+print_cool_output(best_alignment)
