@@ -1,0 +1,18 @@
+ESSAY			Oscar San Jose Rodriguez
+
+1) When we perform an alignment between two sequences, we need a scoring scheme to see if both sequences are related/distant in evolutional terms or not. Because of this, we have to measure: What is related or not?
+For checking this, what we do is comparing the two symbols that are paired, and , based on a certain model, if the pairment is distant or not, and also how much distant it is. The scoring scheme, in general, is based on:
+- Giving more point to the conservation of the symbol, as this indicates more evolutionay closeness (the symbol didn't change)
+- Penalizing mismatches, because this means an evolutionary change.
+- Penalizing gap opening, because this means an insertion or deletion in biological sequences, which is eventually a mutation. Therefore, it indicates evolutionary changes.
+*The equation for the scoring scheme is indicated in the handwritten paper.
+
+2) What we can deduce from high scoring alignment is both sequences (DNA, RNA or proteins) are closely related in evolutional terms, because there has not been too many changes in the sequences, or these changes are not relevant in biological terms. This is because, as I commented previously, we tend to penalise mismatches and giving high scores to matches.
+However, it is very important to highlight the lenght of the alignment. What I mean with this is, the longer the sequence,the higher the probability to have a high score, because there are more opportunities to "add score", therefore we also need a statistic measure to ensure: is this high score relevant?
+
+3) PAM matrices are derived from an evolutionary model in which we measure the number of times we see a certain substitution (for two aminoacids) each 100 pairs based on that model, while BLOSUM natruces are derived from multiple sequence alignments. In BLOSUM matrices, we measure what is the frequency of a certain pair in the alignment (AA frequency, AC frequency...).
+The most important difference between them is the fact that BLOSUM are based on alignment (observed values) while PAM is based on an evolutionary model. PAM matrices are derived from protein families with 85% sequence identity (seq id), while BLOSUM matrices are built with protein families with a certain sequence identity (BLOSUM80, 80% seq id; BLOSUM62, 62% seq id, etc).
+We use matricies in scoring schemes to weight the score of a certain pairment, for example, we can see which is the biological significance of a AA substitution (in fact, this case is conservation), AC substitution, etc.
+Summarising, this allow us to perform the scoring using a model that tell us which is the weight if a certain pairment or change.
+
+4) We use them for measuring which is the score of the pairment found in the NW matrix. In Needleman-Wunsch algorithm, we see which is the optimal alignment for two sequences. When we need to introduce a gap, we don't observe a real match, but in the cases in which we have a pairment between two aminoacids, we have to measure: which score I give to this pairment? Is this mismatch worse than other mismatch? So we need to measure the final score of the alignment based on the sum of the matches, mismatches and gaps found on the optimal alignment. Obviously, we use the matrices only in the cases of matches and mismatches. And we don't only measure matches or mismatches found on optimal alignment, but also all of them that are possible in the NW matrix, for seeing if I need to introduce a gap or not for the optimal alignment (for maximizing score).
